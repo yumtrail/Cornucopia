@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_swipe_scene"
-        app:showPaths="true"
         tools:context=".SwipeActivity">
 
         <FrameLayout
@@ -20,8 +19,7 @@
                 android:id="@+id/bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY" />
         </FrameLayout>
 
         <FrameLayout
@@ -33,8 +31,7 @@
                 android:id="@+id/top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop" />
+                android:scaleType="fitXY" />
         </FrameLayout>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 

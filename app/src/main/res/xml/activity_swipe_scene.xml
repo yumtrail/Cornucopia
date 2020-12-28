@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Transition
         android:id="@+id/homeToPass"
-        app:constraintSetEnd="@id/pass"
+        app:constraintSetEnd="@id/offScreenPass"
         app:constraintSetStart="@id/home"
-        app:duration="300">
+        app:duration="200">
         <OnSwipe
             app:dragDirection="dragLeft"
             app:onTouchUp="autoComplete"
@@ -15,9 +15,9 @@
     </Transition>
     <Transition
         android:id="@+id/homeToLike"
-        app:constraintSetEnd="@id/like"
+        app:constraintSetEnd="@id/offScreenLike"
         app:constraintSetStart="@id/home"
-        app:duration="300">
+        app:duration="200">
         <OnSwipe
             app:dragDirection="dragRight"
             app:onTouchUp="autoComplete"
@@ -26,29 +26,9 @@
             app:touchRegionId="@id/topCard" />
     </Transition>
     <Transition
-        android:id="@+id/likeToOffscreen"
-        app:autoTransition="animateToEnd"
-        app:constraintSetEnd="@id/offScreenLike"
-        app:constraintSetStart="@id/like"
-        app:duration="150" />
-    <Transition
-        android:id="@+id/passToOffscreen"
-        app:autoTransition="animateToEnd"
-        app:constraintSetEnd="@id/offScreenPass"
-        app:constraintSetStart="@id/pass"
-        app:duration="150">
-    </Transition>
-    <Transition
-        android:id="@+id/resetAfterLike"
-        app:autoTransition="jumpToEnd"
+        android:id="@+id/backHome"
         app:constraintSetEnd="@id/home"
-        app:constraintSetStart="@id/offScreenLike"
-        app:duration="0" />
-    <Transition
-        android:id="@+id/resetAfterPass"
-        app:autoTransition="jumpToEnd"
-        app:constraintSetEnd="@id/home"
-        app:constraintSetStart="@id/offScreenPass"
+        app:constraintSetStart="@id/home"
         app:duration="0" />
     <ConstraintSet android:id="@+id/home">
         <Constraint
@@ -87,6 +67,7 @@
             android:layout_marginBottom="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_percent="0.7" />
+
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/like"
@@ -115,6 +96,11 @@
             android:layout_marginBottom="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_percent="0.7" />
+        <Constraint android:id="@+id/bottomCard">
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+        </Constraint>
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/offScreenLike"
@@ -128,6 +114,11 @@
             android:layout_marginBottom="80dp"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintWidth_percent="0.7" />
+        <Constraint android:id="@+id/bottomCard">
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+        </Constraint>
     </ConstraintSet>
 
 </MotionScene>

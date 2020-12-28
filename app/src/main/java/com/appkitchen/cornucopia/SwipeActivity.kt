@@ -16,12 +16,13 @@ class SwipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_swipe)
         val model: FoodCardViewModel by viewModels()
-        model.modelStream.observe(this, Observer { bind(it) })
+        model.modelStream.observe(this, { bind(it) })
         binding.foodLayout.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 when (currentId) {
                     R.id.offScreenLike, R.id.offScreenPass -> {
                         model.swipe()
+                        motionLayout.progress = 0f
                     }
                 }
             }
@@ -29,7 +30,21 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun bind(model: CardModel) {
-        Glide.with(this).load(model.bottom.imgUrl).into(binding.bottom)
-        Glide.with(this).load(model.top.imgUrl).into(binding.top)
+        Glide.with(this).load(model.bottom.imgUrl).dontAnimate()
+            .let { request ->
+                if (binding.bottom.drawable != null) {
+                    request.placeholder(binding.bottom.drawable.constantState?.newDrawable()?.mutate())
+                } else {
+                    request
+                }
+            }.into(binding.bottom)
+        Glide.with(this).load(model.top.imgUrl).dontAnimate()
+            .let { request ->
+                if (binding.top.drawable != null) {
+                    request.placeholder(binding.bottom.drawable.constantState?.newDrawable()?.mutate())
+                } else {
+                    request
+                }
+            }.into(binding.top)
     }
 }
