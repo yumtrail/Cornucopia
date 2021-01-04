@@ -25,11 +25,6 @@
             app:touchAnchorSide="right"
             app:touchRegionId="@id/topCard" />
     </Transition>
-    <Transition
-        android:id="@+id/backHome"
-        app:constraintSetEnd="@id/home"
-        app:constraintSetStart="@id/home"
-        app:duration="0" />
     <ConstraintSet android:id="@+id/home">
         <Constraint
             android:id="@+id/topCard"

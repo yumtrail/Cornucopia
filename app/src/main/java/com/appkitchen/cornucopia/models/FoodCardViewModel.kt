@@ -1,4 +1,4 @@
-package com.appkitchen.cornucopia
+package com.appkitchen.cornucopia.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

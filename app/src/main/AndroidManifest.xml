@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cornucopia">
-        <activity android:name=".SwipeActivity" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".activities.SwipeActivity" />
+        <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

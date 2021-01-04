@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_swipe_scene"
-        tools:context=".SwipeActivity">
+        tools:context=".activities.SwipeActivity">
 
         <FrameLayout
             android:id="@+id/bottomCard"

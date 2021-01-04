@@ -1,9 +1,10 @@
-package com.appkitchen.cornucopia
+package com.appkitchen.cornucopia.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import com.appkitchen.cornucopia.R
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var button: Button

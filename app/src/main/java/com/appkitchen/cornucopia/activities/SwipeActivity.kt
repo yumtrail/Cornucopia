@@ -1,13 +1,15 @@
-package com.appkitchen.cornucopia
+package com.appkitchen.cornucopia.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import com.appkitchen.cornucopia.R
 import com.appkitchen.cornucopia.databinding.ActivitySwipeBinding
+import com.appkitchen.cornucopia.models.CardModel
+import com.appkitchen.cornucopia.models.FoodCardViewModel
 import com.bumptech.glide.Glide
 
 class SwipeActivity : AppCompatActivity() {
