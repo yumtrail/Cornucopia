@@ -1,6 +1,7 @@
 package com.appkitchen.cornucopia.db
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RestaurantDao {
@@ -15,5 +16,5 @@ interface RestaurantDao {
 
     @Transaction
     @Query("SELECT * FROM restaurant_table")
-    fun getRestaurantsAndFoods(): List<RestaurantsFoods>
+    fun getRestaurantsAndFoods(): Flow<List<RestaurantsFoods>>
 }

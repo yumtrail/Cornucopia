@@ -2,14 +2,14 @@ package com.appkitchen.cornucopia.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.appkitchen.cornucopia.objects.PriceBracket
 import com.appkitchen.cornucopia.objects.Address
 import com.appkitchen.cornucopia.objects.Cuisine
+import com.appkitchen.cornucopia.objects.PriceBracket
 import java.net.URL
 
 @Entity(tableName = "restaurant_table")
 data class Restaurant(
-    @PrimaryKey(autoGenerate = true) val restaurantId: Long,
+    @PrimaryKey val restaurantId: Long,
     val name: String,
     val phoneNumber: String,
     val address: Address,
