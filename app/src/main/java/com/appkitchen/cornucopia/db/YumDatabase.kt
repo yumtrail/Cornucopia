@@ -4,23 +4,26 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.appkitchen.cornucopia.com.appkitchen.cornucopia.utils.Converters
 
-@Database(entities = [Restaurant::class], version = 1, exportSchema = false)
-abstract class RestaurantDb : RoomDatabase() {
-
+@Database(entities = [Restaurant::class, Food::class], version = 1)
+@TypeConverters(Converters::class)
+abstract class YumDatabase : RoomDatabase() {
     abstract fun restaurantDao(): RestaurantDao
+    abstract fun foodDao(): FoodDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: RestaurantDb? = null
+        private var INSTANCE: YumDatabase? = null
 
-        fun getDatabase(context: Context): RestaurantDb {
+        fun getDatabase(context: Context): YumDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    RestaurantDb::class.java,
-                    "restaurant_db"
+                    YumDatabase::class.java,
+                    "yum_db"
                 ).build()
                 INSTANCE = instance
                 instance

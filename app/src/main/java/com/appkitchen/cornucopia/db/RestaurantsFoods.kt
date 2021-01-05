@@ -9,5 +9,5 @@ data class RestaurantsFoods(
         parentColumn = "restaurantId",
         entityColumn = "ownerId"
     )
-    val restaurants: List<Restaurant>
+    val foods: List<Food>
 )

@@ -3,19 +3,15 @@ package com.appkitchen.cornucopia.models
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.appkitchen.cornucopia.repo.FoodCardRepo
 
-class FoodCardViewModel : ViewModel() {
+class FoodCardViewModel(private val repository: FoodCardRepo) : ViewModel() {
     private val stream = MutableLiveData<CardModel>()
     val modelStream: LiveData<CardModel>
         get() = stream
 
-    private val data = listOf(
-        FoodCardModel(imgUrl = "https://houseofyumm.com/wp-content/uploads/2018/03/taco-seasoning.jpg"),
-        FoodCardModel(imgUrl = "https://kirbiecravings.com/wp-content/uploads/2019/11/char-siu-11.jpg"),
-        FoodCardModel(imgUrl = "https://cdn1.girlgonegourmet.com/wp-content/uploads/2020/08/French-Onion-Hot-Dogs-9.jpg"),
-        FoodCardModel(imgUrl = "https://thegirlonbloor.com/wp-content/uploads/2015/03/Pulled-Chicken-Burrito-2.jpg"),
-        FoodCardModel(imgUrl = "https://thegirlonbloor.com/wp-content/uploads/2015/08/Easy-Korean-Bibimbap-6.jpg"),
-    )
+    private val data = repository.foodCards
     private var idx = 0
 
     private val topCard
@@ -34,5 +30,15 @@ class FoodCardViewModel : ViewModel() {
 
     private fun updateStream() {
         stream.value = CardModel(top = topCard, bottom = bottomCard)
+    }
+}
+
+class FoodCardViewModelFactory(private val repository: FoodCardRepo) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(FoodCardViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return FoodCardViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
