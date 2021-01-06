@@ -7,7 +7,7 @@ data class RestaurantsFoods(
     @Embedded val restaurant: Restaurant,
     @Relation(
         parentColumn = "restaurantId",
-        entityColumn = "ownerId"
+        entityColumn = "restaurantId"
     )
     val foods: List<Food>
 )

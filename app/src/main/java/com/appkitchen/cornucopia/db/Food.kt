@@ -3,18 +3,17 @@ package com.appkitchen.cornucopia.db
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.math.BigDecimal
 
 @Entity(tableName = "food_table",
     foreignKeys = [ForeignKey(entity = Restaurant::class,
         parentColumns = ["restaurantId"],
-        childColumns = ["ownerId"],
+        childColumns = ["restaurantId"],
         onDelete = ForeignKey.CASCADE)])
 data class Food(
-    @PrimaryKey(autoGenerate = true) val foodId: Long,
-    val ownerId: Long,
-    val name: String,
+    @PrimaryKey(autoGenerate = true) val foodId: Long = 0,
+    var restaurantId: Long = 0,
+//    val name: String,
     val imgUrls: List<String>,
-    val price: BigDecimal,
-    val diets: List<String>? = null,
+//    val price: BigDecimal,
+//    val diets: List<String>? = null,
 )

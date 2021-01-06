@@ -3,8 +3,11 @@ package com.appkitchen.cornucopia
 import android.app.Application
 import com.appkitchen.cornucopia.db.YumDatabase
 import com.appkitchen.cornucopia.repo.FoodCardRepo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 
 class YumApplication : Application() {
-    val database by lazy { YumDatabase.getDatabase(this) }
+    private val applicationScope = CoroutineScope(SupervisorJob())
+    private val database by lazy { YumDatabase.getDatabase(this, applicationScope) }
     val cardRepo by lazy { FoodCardRepo(database.restaurantDao()) }
 }
