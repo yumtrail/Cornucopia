@@ -8,6 +8,6 @@ import kotlinx.coroutines.SupervisorJob
 
 class YumApplication : Application() {
     private val applicationScope = CoroutineScope(SupervisorJob())
-    private val database by lazy { YumDatabase.getDatabase(this, applicationScope) }
+    private val database by lazy { YumDatabase.getDatabase(this) }
     val cardRepo by lazy { FoodCardRepo(database.restaurantDao()) }
 }

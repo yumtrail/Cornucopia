@@ -12,7 +12,6 @@ import com.appkitchen.cornucopia.databinding.ActivitySwipeBinding
 import com.appkitchen.cornucopia.models.CardModel
 import com.appkitchen.cornucopia.models.FoodCardViewModel
 import com.appkitchen.cornucopia.models.FoodCardViewModelFactory
-import com.bumptech.glide.Glide
 
 class SwipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySwipeBinding
@@ -25,7 +24,9 @@ class SwipeActivity : AppCompatActivity() {
         }
 
         model.modelStream.observe(this, { bind(it) })
-
+        binding.nextImg.setOnClickListener {
+            binding.top.nextImg()
+        }
         binding.foodLayout.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 when (currentId) {
@@ -39,23 +40,12 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun bind(model: CardModel) {
-        Glide.with(this).load(model.bottom.food.imgUrls[0]).dontAnimate()
-            .let { request ->
-                if (binding.bottom.drawable != null) {
-                    request.placeholder(binding.bottom.drawable.constantState?.newDrawable()
-                        ?.mutate())
-                } else {
-                    request
-                }
-            }.into(binding.bottom)
-        Glide.with(this).load(model.top.food.imgUrls[0]).dontAnimate()
-            .let { request ->
-                if (binding.top.drawable != null) {
-                    request.placeholder(binding.bottom.drawable.constantState?.newDrawable()
-                        ?.mutate())
-                } else {
-                    request
-                }
-            }.into(binding.top)
+        val drawable = binding.bottom.drawable
+        binding.bottom.prevDrawable = drawable
+        binding.bottom.tempDrawable = drawable
+        binding.bottom.imgUrls = model.bottom.food.imgUrls
+        binding.top.prevDrawable = binding.top.drawable
+        binding.top.tempDrawable = drawable
+        binding.top.imgUrls = model.top.food.imgUrls
     }
 }

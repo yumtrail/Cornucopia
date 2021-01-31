@@ -6,18 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.appkitchen.cornucopia.repo.FoodCardRepo
 
-class FoodCardViewModel(private val repository: FoodCardRepo) : ViewModel() {
+class FoodCardViewModel(repository: FoodCardRepo) : ViewModel() {
     private val stream = MutableLiveData<CardModel>()
     val modelStream: LiveData<CardModel>
         get() = stream
-
-    private val data = repository.foodCards
+    private val foodCards = repository.foodCards
     private var idx = 0
 
     private val topCard
-        get() = data[idx % data.size]
+        get() = foodCards[idx % foodCards.size]
     private val bottomCard
-        get() = data[(idx + 1) % data.size]
+        get() = foodCards[(idx + 1) % foodCards.size]
 
     init {
         updateStream()

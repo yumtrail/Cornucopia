@@ -12,8 +12,5 @@ import androidx.room.PrimaryKey
 data class Food(
     @PrimaryKey(autoGenerate = true) val foodId: Long = 0,
     var restaurantId: Long = 0,
-//    val name: String,
     val imgUrls: List<String>,
-//    val price: BigDecimal,
-//    val diets: List<String>? = null,
 )

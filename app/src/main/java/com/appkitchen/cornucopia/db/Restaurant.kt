@@ -7,10 +7,4 @@ import androidx.room.PrimaryKey
 data class Restaurant(
     @PrimaryKey(autoGenerate = false) val restaurantId: Long = 0,
     val name: String,
-//    val phoneNumber: String,
-//    val address: String,
-//    val logoUrl: String,
-//    val outsideImgUrl: String,
-//    val cuisines: List<String>,
-//    val priceBracket: Int
 )
