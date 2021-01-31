@@ -40,12 +40,17 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun bind(model: CardModel) {
-        val drawable = binding.bottom.drawable
-        binding.bottom.prevDrawable = drawable
-        binding.bottom.tempDrawable = drawable
-        binding.bottom.imgUrls = model.bottom.food.imgUrls
-        binding.top.prevDrawable = binding.top.drawable
-        binding.top.tempDrawable = drawable
-        binding.top.imgUrls = model.top.food.imgUrls
+        val bottomDrawable = binding.bottom.drawable
+        val topDrawable = binding.top.drawable
+        binding.bottom.apply {
+            prevDrawable = bottomDrawable
+            tempDrawable = bottomDrawable
+            imgUrls = model.bottom.food.imgUrls
+        }
+        binding.top.apply {
+            prevDrawable = topDrawable
+            tempDrawable = bottomDrawable
+            imgUrls = model.top.food.imgUrls
+        }
     }
 }
