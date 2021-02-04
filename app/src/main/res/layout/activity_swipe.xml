@@ -39,12 +39,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/nextImg"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
-                android:text="🔄 Pic" />
+                android:orientation="horizontal"
+                android:checkedButton="@id/radioButton1">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_background"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:padding="1dp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_background"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:padding="1dp" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_button_background"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:padding="1dp" />
+
+            </RadioGroup>
         </FrameLayout>
     </com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.ClickMotionLayout>
 

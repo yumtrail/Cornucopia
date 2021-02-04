@@ -1,6 +1,7 @@
 package com.appkitchen.cornucopia.activities
 
 import android.os.Bundle
+import android.widget.RadioButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -24,19 +25,58 @@ class SwipeActivity : AppCompatActivity() {
         }
 
         model.modelStream.observe(this, { bind(it) })
-        binding.nextImg.setOnClickListener {
-            binding.top.nextImg()
-        }
-        binding.foodLayout.setTransitionListener(object : TransitionAdapter() {
+        setupViews(binding, model)
+    }
+
+    private fun setupViews(binding: ActivitySwipeBinding, model: FoodCardViewModel) {
+        setupLayout(binding.foodLayout, model)
+        setupImgButtons(binding)
+    }
+
+    private fun setupLayout(layout: MotionLayout, model: FoodCardViewModel) {
+        layout.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
                 when (currentId) {
-                    R.id.offScreenLike, R.id.offScreenPass -> {
-                        model.swipe()
-                        motionLayout.progress = 0f
+                    R.id.offScreenLike -> {
+                        model.swipeRight()
+                        resetView(motionLayout, binding.radioButton1)
+                    }
+                    R.id.offScreenPass -> {
+                        model.swipeLeft()
+                        resetView(motionLayout, binding.radioButton1)
                     }
                 }
             }
         })
+    }
+
+    private fun setupImgButtons(binding: ActivitySwipeBinding) {
+        binding.radioButton1.apply {
+            setOnClickListener {
+                if (isChecked) {
+                    binding.top.loadFirstImg()
+                }
+            }
+        }
+        binding.radioButton2.apply {
+            setOnClickListener {
+                if (isChecked) {
+                    binding.top.loadSecondImg()
+                }
+            }
+        }
+        binding.radioButton3.apply {
+            setOnClickListener {
+                if (isChecked) {
+                    binding.top.loadThirdImg()
+                }
+            }
+        }
+    }
+
+    private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
+        layout.progress = 0f
+        firstButton.isChecked = true
     }
 
     private fun bind(model: CardModel) {
@@ -53,4 +93,5 @@ class SwipeActivity : AppCompatActivity() {
             imgUrls = model.top.food.imgUrls
         }
     }
+
 }

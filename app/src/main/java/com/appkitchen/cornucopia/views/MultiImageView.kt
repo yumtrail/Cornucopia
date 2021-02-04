@@ -29,6 +29,18 @@ class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
         Glide.with(this).load(imgUrls[idx % imgUrls.size]).transform(RoundedCorners(cornerRadius)).into(this)
     }
 
+    fun loadFirstImg() {
+        Glide.with(this).load(imgUrls[0]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+    }
+
+    fun loadSecondImg() {
+        Glide.with(this).load(imgUrls[1]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+    }
+
+    fun loadThirdImg() {
+        Glide.with(this).load(imgUrls[2]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+    }
+
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context,

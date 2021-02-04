@@ -22,6 +22,14 @@ class FoodCardViewModel(repository: FoodCardRepo) : ViewModel() {
         updateStream()
     }
 
+    fun swipeLeft() {
+        swipe()
+    }
+
+    fun swipeRight() {
+       swipe()
+    }
+
     fun swipe() {
         idx++
         updateStream()
