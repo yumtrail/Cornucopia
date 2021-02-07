@@ -1,16 +1,20 @@
 package com.appkitchen.cornucopia.com.appkitchen.cornucopia.views
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 
 class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
     private val cornerRadius = 25
     var prevDrawable: Drawable? = null
     var tempDrawable: Drawable? = null
     var idx: Int = 0
+    var bitmaps: MutableList<Bitmap> = mutableListOf()
     var imgUrls: List<String> = listOf("")
         set(value) {
             field = value
@@ -22,23 +26,41 @@ class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
                         request
                     }
                 }.into(this)
+            loadBitmaps(value)
         }
+
+    private fun loadBitmaps(urls: List<String>) {
+        for (url in urls) {
+            Glide.with(this).asBitmap().load(url).transform(RoundedCorners(cornerRadius))
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?,
+                    ) {
+                        bitmaps.add(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
+        }
+    }
 
     fun nextImg() {
         ++idx
-        Glide.with(this).load(imgUrls[idx % imgUrls.size]).transform(RoundedCorners(cornerRadius)).into(this)
+        this.setImageBitmap(bitmaps[idx % bitmaps.size])
     }
 
     fun loadFirstImg() {
-        Glide.with(this).load(imgUrls[0]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+        this.setImageBitmap(bitmaps[0])
     }
 
     fun loadSecondImg() {
-        Glide.with(this).load(imgUrls[1]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+        this.setImageBitmap(bitmaps[1])
     }
 
     fun loadThirdImg() {
-        Glide.with(this).load(imgUrls[2]).transform(RoundedCorners(cornerRadius)).dontAnimate().into(this)
+        this.setImageBitmap(bitmaps[2])
     }
 
     constructor(context: Context) : super(context)

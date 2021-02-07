@@ -51,6 +51,7 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun setupImgButtons(binding: ActivitySwipeBinding) {
+
         binding.radioButton1.apply {
             setOnClickListener {
                 if (isChecked) {
