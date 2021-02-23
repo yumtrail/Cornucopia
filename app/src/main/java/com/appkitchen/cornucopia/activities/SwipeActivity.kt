@@ -1,6 +1,7 @@
 package com.appkitchen.cornucopia.activities
 
 import android.os.Bundle
+import android.view.View
 import android.widget.RadioButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +73,33 @@ class SwipeActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.radioButton4.apply {
+            setOnClickListener {
+                if (isChecked) {
+                    binding.top.loadImgAtIdx(3)
+                }
+            }
+        }
+    }
+
+    private fun enableBttns(numImgs: Int) {
+        binding.apply {
+            when (numImgs) {
+                1 -> radioButtons.visibility = View.INVISIBLE
+                2 -> radioButton3.visibility = View.GONE
+                2, 3 -> radioButton4.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun resetRadioGroup() {
+        binding.apply {
+            radioButtons.visibility = View.VISIBLE
+            radioButton1.visibility = View.VISIBLE
+            radioButton2.visibility = View.VISIBLE
+            radioButton3.visibility = View.VISIBLE
+            radioButton4.visibility = View.VISIBLE
+        }
     }
 
     private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
@@ -92,6 +120,8 @@ class SwipeActivity : AppCompatActivity() {
             tempDrawable = bottomDrawable
             imgUrls = model.top.food.imgUrls
         }
+        resetRadioGroup()
+        enableBttns(model.top.food.imgUrls.size)
     }
 
 }
