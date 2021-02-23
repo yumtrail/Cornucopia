@@ -15,6 +15,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "int", "YUM_DB_VERSION", YUM_DB_VERSION
@@ -73,5 +74,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$room"
     kapt "androidx.room:room-compiler:$room"
     implementation "com.google.code.gson:gson:$gson"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
 }

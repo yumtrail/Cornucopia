@@ -51,25 +51,24 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun setupImgButtons(binding: ActivitySwipeBinding) {
-
         binding.radioButton1.apply {
             setOnClickListener {
                 if (isChecked) {
-                    binding.top.loadFirstImg()
+                    binding.top.loadImgAtIdx(0)
                 }
             }
         }
         binding.radioButton2.apply {
             setOnClickListener {
                 if (isChecked) {
-                    binding.top.loadSecondImg()
+                    binding.top.loadImgAtIdx(1)
                 }
             }
         }
         binding.radioButton3.apply {
             setOnClickListener {
                 if (isChecked) {
-                    binding.top.loadThirdImg()
+                    binding.top.loadImgAtIdx(2)
                 }
             }
         }

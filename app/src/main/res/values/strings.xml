@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Yumtrail</string>
+    <string name="app_name">yumtrail</string>
     <string name="start_button">Start Swiping</string>
+    <string name="yumtrail_name">yumtrail</string>
 </resources>

@@ -3,86 +3,141 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.ClickMotionLayout
-        android:id="@+id/foodLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutDescription="@xml/activity_swipe_scene"
-        tools:context=".activities.SwipeActivity">
+        android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/bottomCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="76dp"
+            android:src="@drawable/ic_round_menu"
+            app:layout_constraintBottom_toTopOf="@id/foodLayout"
+            app:layout_constraintEnd_toStartOf="@id/logoIcon"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.MultiImageView
-                android:id="@+id/bottom"
+        <ImageView
+            android:id="@+id/logoIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/yumtrail_ic"
+            app:layout_constraintBottom_toTopOf="@id/foodLayout"
+            app:layout_constraintEnd_toStartOf="@+id/title"
+            app:layout_constraintStart_toEndOf="@id/menu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:fontFamily="@font/hkgrotesk_bold"
+            android:text="@string/yumtrail_name"
+            android:textColor="@color/yum_green"
+            android:textSize="29sp"
+            app:layout_constraintBottom_toTopOf="@id/foodLayout"
+            app:layout_constraintEnd_toStartOf="@id/profileIcon"
+            app:layout_constraintStart_toEndOf="@+id/logoIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/profileIcon"
+            android:layout_width="36dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="76dp"
+            android:src="@drawable/ic_person_outline"
+            app:layout_constraintBottom_toTopOf="@id/foodLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.YumtrailMotionLayout
+            android:id="@+id/foodLayout"
+            android:layout_width="380dp"
+            android:layout_height="460dp"
+            android:splitMotionEvents="false"
+            app:layoutDescription="@xml/activity_swipe_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:context=".activities.SwipeActivity">
+
+            <FrameLayout
+                android:id="@+id/bottomCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-        </FrameLayout>
+                android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/topCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.MultiImageView
+                    android:id="@+id/bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
 
-            <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.MultiImageView
-                android:id="@+id/top"
+            <FrameLayout
+                android:id="@+id/topCard"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-        </FrameLayout>
+                android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/buttons"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.MultiImageView
+                    android:id="@+id/top"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+            </FrameLayout>
 
-            <RadioGroup
-                android:id="@+id/radioButtons"
+            <FrameLayout
+                android:id="@+id/buttons"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:orientation="horizontal"
-                android:checkedButton="@id/radioButton1">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@android:color/transparent"
-                    android:gravity="center"
-                    android:padding="1dp" />
+                <RadioGroup
+                    android:id="@+id/radioButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:checkedButton="@id/radioButton1"
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@android:color/transparent"
-                    android:gravity="center"
-                    android:padding="1dp" />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_background"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="1dp" />
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/radio_button_background"
-                    android:button="@android:color/transparent"
-                    android:gravity="center"
-                    android:padding="1dp" />
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_background"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="1dp" />
 
-            </RadioGroup>
-        </FrameLayout>
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_button_background"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="1dp" />
 
-    </com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.ClickMotionLayout>
+                </RadioGroup>
+            </FrameLayout>
 
+        </com.appkitchen.cornucopia.com.appkitchen.cornucopia.views.YumtrailMotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

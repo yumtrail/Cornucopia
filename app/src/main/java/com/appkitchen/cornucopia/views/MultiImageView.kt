@@ -4,17 +4,28 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 
 class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
-    private val cornerRadius = 25
+    private val cornerRadius = 40
     var prevDrawable: Drawable? = null
     var tempDrawable: Drawable? = null
-    var idx: Int = 0
-    var bitmaps: MutableList<Bitmap> = mutableListOf()
+    private var drawableCache: HashMap<Int, Bitmap> = HashMap()
+    private val circularProgressDrawable = CircularProgressDrawable(this.context)
+
+    init {
+        circularProgressDrawable.apply {
+            strokeWidth = 10f
+            centerRadius = 50f
+            start()
+        }
+    }
+
     var imgUrls: List<String> = listOf("")
         set(value) {
             field = value
@@ -26,18 +37,20 @@ class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
                         request
                     }
                 }.into(this)
-            loadBitmaps(value)
+            drawableCache.clear()
+            loadDrawableCache(value)
         }
 
-    private fun loadBitmaps(urls: List<String>) {
-        for (url in urls) {
-            Glide.with(this).asBitmap().load(url).transform(RoundedCorners(cornerRadius))
+    private fun loadDrawableCache(urls: List<String>) {
+        for (i in urls.indices) {
+            Glide.with(this).asBitmap().load(urls[i]).dontAnimate()
+                .transform(RoundedCorners(cornerRadius))
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?,
                     ) {
-                        bitmaps.add(resource)
+                        drawableCache[i] = resource
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {
@@ -46,21 +59,14 @@ class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
         }
     }
 
-    fun nextImg() {
-        ++idx
-        this.setImageBitmap(bitmaps[idx % bitmaps.size])
-    }
-
-    fun loadFirstImg() {
-        this.setImageBitmap(bitmaps[0])
-    }
-
-    fun loadSecondImg() {
-        this.setImageBitmap(bitmaps[1])
-    }
-
-    fun loadThirdImg() {
-        this.setImageBitmap(bitmaps[2])
+    fun loadImgAtIdx(idx: Int) {
+        if (drawableCache.containsKey(idx)) {
+            this.setImageBitmap(drawableCache[idx])
+        } else {
+            Glide.with(this).load(imgUrls[idx]).placeholder(circularProgressDrawable)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .transform(RoundedCorners(cornerRadius)).into(this)
+        }
     }
 
     constructor(context: Context) : super(context)

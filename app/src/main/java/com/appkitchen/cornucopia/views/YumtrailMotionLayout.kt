@@ -17,10 +17,9 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
     private val clickTimeOut: Long = 150
     private var touchStarted = false
     private var clickStartTime: Long = 0
-    private var idx = 0
     private var numBtns = 3
 
-    private val viewToDetectTouch by lazy {
+    private val imageView by lazy {
         findViewById<MultiImageView>(R.id.top)
     }
 
@@ -36,7 +35,7 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
                 distanceX: Float,
                 distanceY: Float,
             ): Boolean {
-                viewToDetectTouch.getHitRect(viewRect)
+                imageView.getHitRect(viewRect)
                 return viewRect.contains(e1.x.toInt(), e1.y.toInt())
             }
         }
@@ -61,15 +60,16 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
                 touchStarted = false
-                idx = 0
             }
         })
     }
 
     private fun checkNextRBtn() {
-        ++idx
+        var checkedBttn: RadioButton = radioGroup.findViewById(radioGroup.checkedRadioButtonId)
+        var nextIdx = (radioGroup.indexOfChild(checkedBttn) + 1) % numBtns
+        imageView.loadImgAtIdx(nextIdx)
         radioGroup.clearCheck()
-        (radioGroup.getChildAt(idx % numBtns) as RadioButton).isChecked = true
+        (radioGroup.getChildAt(nextIdx) as RadioButton).isChecked = true
     }
 
     override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
@@ -83,7 +83,6 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
             }
             MotionEvent.ACTION_UP -> {
                 if (event.eventTime - clickStartTime <= clickTimeOut) {
-                    viewToDetectTouch.nextImg()
                     checkNextRBtn()
                 }
                 touchStarted = false
@@ -95,7 +94,7 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
             }
         }
         if (!touchStarted) {
-            viewToDetectTouch.getHitRect(viewRect)
+            imageView.getHitRect(viewRect)
             touchStarted = viewRect.contains(event.x.toInt(), event.y.toInt())
         }
         return touchStarted && super.onTouchEvent(event)
