@@ -66,9 +66,9 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
 
     private fun checkNextRBtn() {
         if (imageView.imgUrls.size > 1) {
-            if (imageView.imgUrls.size > 4) numBtns = 4 else numBtns = imageView.imgUrls.size
-            var checkedBttn: RadioButton = radioGroup.findViewById(radioGroup.checkedRadioButtonId)
-            var nextIdx = (radioGroup.indexOfChild(checkedBttn) + 1) % numBtns
+            numBtns = if (imageView.imgUrls.size > 4) 4 else imageView.imgUrls.size
+            val checkedBttn: RadioButton = radioGroup.findViewById(radioGroup.checkedRadioButtonId)
+            val nextIdx = (radioGroup.indexOfChild(checkedBttn) + 1) % numBtns
             imageView.loadImgAtIdx(nextIdx)
             radioGroup.clearCheck()
             (radioGroup.getChildAt(nextIdx) as RadioButton).isChecked = true

@@ -26,16 +26,17 @@
             app:touchRegionId="@id/topCard" />
     </Transition>
     <ConstraintSet android:id="@+id/home">
-        <Constraint
-            android:id="@+id/topCard"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint android:id="@+id/topCard">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
         <Constraint android:id="@+id/bottomCard">
             <Layout
                 android:layout_width="match_parent"
@@ -45,24 +46,73 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp" />
             <Transform
-                android:scaleX="0.9"
-                android:scaleY="0.9" />
+                android:scaleX="0.8"
+                android:scaleY="0.8" />
+        </Constraint>
+        <Constraint android:id="@+id/dislikeIcon">
+            <Layout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="@id/topCard"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/topCard"
+                app:layout_constraintTop_toTopOf="@id/topCard" />
+            <Transform
+                android:scaleX="0.5"
+                android:scaleY="0.5" />
+
+            <PropertySet android:alpha="0" />
+        </Constraint>
+        <Constraint android:id="@+id/likeIcon">
+
+            <Layout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="@id/topCard"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/topCard"
+                app:layout_constraintTop_toTopOf="@id/topCard" />
+
+
+            <Transform
+                android:scaleX="0.5"
+                android:scaleY="0.5" />
+
+            <PropertySet android:alpha="0" />
         </Constraint>
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/pass"
         app:deriveConstraintsFrom="@id/home">
-        <Constraint
-            android:id="@id/topCard"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.7" />
+        <Constraint android:id="@id/topCard">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="200dp"
+                android:layout_marginBottom="80dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.7" />
+        </Constraint>
+        <Constraint android:id="@+id/dislikeIcon">
 
+            <Layout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="200dp"
+                app:layout_constraintBottom_toBottomOf="@id/topCard"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/topCard"
+                app:layout_constraintTop_toTopOf="@id/topCard" />
+
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+
+            <PropertySet android:alpha="1" />
+
+        </Constraint>
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/like"
@@ -77,6 +127,24 @@
             android:layout_marginBottom="80dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintWidth_percent="0.7" />
+
+        <Constraint android:id="@+id/likeIcon">
+            <Layout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="200dp"
+                app:layout_constraintBottom_toBottomOf="@id/topCard"
+                app:layout_constraintEnd_toEndOf="@id/topCard"
+                app:layout_constraintStart_toStartOf="@id/topCard"
+                app:layout_constraintTop_toTopOf="@id/topCard" />
+
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+
+            <PropertySet android:alpha="1" />
+
+        </Constraint>
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/offScreenPass"

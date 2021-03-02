@@ -87,7 +87,7 @@ class SwipeActivity : AppCompatActivity() {
             when (numImgs) {
                 1 -> radioButtons.visibility = View.INVISIBLE
                 2 -> radioButton3.visibility = View.GONE
-                2, 3 -> radioButton4.visibility = View.GONE
+                2 or 3 -> radioButton4.visibility = View.GONE
             }
         }
     }
@@ -102,12 +102,15 @@ class SwipeActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
-        layout.progress = 0f
-        firstButton.isChecked = true
-    }
+//    private fun loadChips(model: CardModel) {
+//        binding.attrChips.forEach {
+//            (it as Chip).apply {
+//                if (this.text.toString().toLowerCase().equals())
+//            }
+//        }
+//    }
 
-    private fun bind(model: CardModel) {
+    private fun bindImgs(model: CardModel) {
         val bottomDrawable = binding.bottom.drawable
         val topDrawable = binding.top.drawable
         binding.bottom.apply {
@@ -120,6 +123,17 @@ class SwipeActivity : AppCompatActivity() {
             tempDrawable = bottomDrawable
             imgUrls = model.top.food.imgUrls
         }
+    }
+
+
+
+    private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
+        layout.progress = 0f
+        firstButton.isChecked = true
+    }
+
+    private fun bind(model: CardModel) {
+        bindImgs(model)
         resetRadioGroup()
         enableBttns(model.top.food.imgUrls.size)
     }

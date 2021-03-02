@@ -27,5 +27,6 @@ interface RestaurantDao {
     suspend fun delete(restaurant: Restaurant)
 
     @Query("SELECT * FROM restaurant_table")
+    @Transaction
     fun getRestaurantsAndFoods(): List<RestaurantsFoods>
 }

@@ -87,7 +87,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY" />
+
             </FrameLayout>
+
+            <ImageView
+                android:id="@+id/likeIcon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_circle"
+                android:src="@drawable/ic_heart" />
+
+            <ImageView
+                android:id="@+id/dislikeIcon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_circle"
+                android:src="@drawable/ic_dislike" />
 
             <FrameLayout
                 android:id="@+id/buttons"
@@ -100,8 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center_horizontal"
                     android:checkedButton="@id/radioButton1"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/radioButton1"
@@ -165,6 +179,7 @@
             app:layout_constraintTop_toBottomOf="@id/foodLayout">
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/attrChips"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:singleLine="true">
@@ -172,20 +187,21 @@
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Spicy"
-                    app:chipIcon="@drawable/ic_pepper"/>
+                    android:text="@string/spicy_chip"
+                    app:chipIcon="@drawable/ic_pepper" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vegetarian"
-                    app:chipIcon="@drawable/ic_vegetables"/>
+                    android:text="@string/vegetarian_chip"
+                    app:chipIcon="@drawable/ic_vegetables" />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customizable"
-                    app:chipIcon="@drawable/ic_layers"/>
+                    android:text="@string/customizable_chip"
+                    app:chipIcon="@drawable/ic_layers" />
+
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
@@ -193,8 +209,9 @@
             android:id="@+id/foodName"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="7dp"
-            android:text="Taco"
+            android:text="Burritos"
             android:textSize="36sp"
             app:layout_constraintBottom_toTopOf="@+id/foodDesc"
             app:layout_constraintEnd_toStartOf="@id/verifiedIcon"
@@ -219,7 +236,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="12dp"
-            android:text="1.1 miles away"
+            android:text="0.7 mi."
             android:textSize="21sp"
             app:layout_constraintBottom_toTopOf="@id/foodDesc"
             app:layout_constraintEnd_toEndOf="parent"
@@ -230,9 +247,9 @@
             android:id="@+id/foodDesc"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginStart="25dp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting"
-            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:text="Spicy Jackfruit Carnitas, Flour Tortilla, Lime-Infused Guac"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
