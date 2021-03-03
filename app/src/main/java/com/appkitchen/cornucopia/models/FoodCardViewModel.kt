@@ -30,7 +30,7 @@ class FoodCardViewModel(repository: FoodCardRepo) : ViewModel() {
        swipe()
     }
 
-    fun swipe() {
+    private fun swipe() {
         idx++
         updateStream()
     }

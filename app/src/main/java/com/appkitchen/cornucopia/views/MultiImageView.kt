@@ -12,7 +12,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 
 class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
-    private val cornerRadius = 40
+    private val cornerRadius = 25
     var prevDrawable: Drawable? = null
     var tempDrawable: Drawable? = null
     private var drawableCache: HashMap<Int, Bitmap> = HashMap()

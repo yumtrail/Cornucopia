@@ -12,6 +12,17 @@
             app:touchAnchorId="@id/topCard"
             app:touchAnchorSide="left"
             app:touchRegionId="@id/topCard" />
+        <KeyFrameSet>
+
+            <KeyPosition
+                app:drawPath="path"
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/topCard"
+                app:percentX="0.5"
+                app:percentY="0.1" />
+
+        </KeyFrameSet>
     </Transition>
     <Transition
         android:id="@+id/homeToLike"
@@ -24,6 +35,18 @@
             app:touchAnchorId="@id/topCard"
             app:touchAnchorSide="right"
             app:touchRegionId="@id/topCard" />
+        <KeyFrameSet>
+
+            <KeyPosition
+                app:drawPath="path"
+                app:framePosition="50"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/topCard"
+                app:percentX="0.5"
+                app:percentY="-0.1" />
+
+        </KeyFrameSet>
+
     </Transition>
     <ConstraintSet android:id="@+id/home">
         <Constraint android:id="@+id/topCard">
@@ -51,8 +74,8 @@
         </Constraint>
         <Constraint android:id="@+id/dislikeIcon">
             <Layout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="@id/topCard"
                 app:layout_constraintEnd_toEndOf="@id/topCard"
                 app:layout_constraintStart_toStartOf="@id/topCard"
@@ -66,8 +89,8 @@
         <Constraint android:id="@+id/likeIcon">
 
             <Layout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="@id/topCard"
                 app:layout_constraintEnd_toEndOf="@id/topCard"
                 app:layout_constraintStart_toStartOf="@id/topCard"

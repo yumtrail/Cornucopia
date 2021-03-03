@@ -2,18 +2,24 @@ package com.appkitchen.cornucopia.activities
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import androidx.core.view.forEach
+import androidx.core.view.forEachIndexed
 import androidx.databinding.DataBindingUtil
 import com.appkitchen.cornucopia.R
 import com.appkitchen.cornucopia.YumApplication
+import com.appkitchen.cornucopia.containsIgnoreCase
 import com.appkitchen.cornucopia.databinding.ActivitySwipeBinding
 import com.appkitchen.cornucopia.models.CardModel
 import com.appkitchen.cornucopia.models.FoodCardViewModel
 import com.appkitchen.cornucopia.models.FoodCardViewModelFactory
+import com.google.android.material.chip.Chip
 
 class SwipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySwipeBinding
@@ -52,31 +58,14 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun setupImgButtons(binding: ActivitySwipeBinding) {
-        binding.radioButton1.apply {
-            setOnClickListener {
-                if (isChecked) {
-                    binding.top.loadImgAtIdx(0)
-                }
-            }
-        }
-        binding.radioButton2.apply {
-            setOnClickListener {
-                if (isChecked) {
-                    binding.top.loadImgAtIdx(1)
-                }
-            }
-        }
-        binding.radioButton3.apply {
-            setOnClickListener {
-                if (isChecked) {
-                    binding.top.loadImgAtIdx(2)
-                }
-            }
-        }
-        binding.radioButton4.apply {
-            setOnClickListener {
-                if (isChecked) {
-                    binding.top.loadImgAtIdx(3)
+        binding.radioButtons.apply {
+            forEachIndexed { index, _ ->
+                getChildAt(index).apply {
+                    setOnClickListener {
+                        if ((this as AppCompatRadioButton).isChecked) {
+                            binding.top.loadImgAtIdx(index)
+                        }
+                    }
                 }
             }
         }
@@ -86,29 +75,33 @@ class SwipeActivity : AppCompatActivity() {
         binding.apply {
             when (numImgs) {
                 1 -> radioButtons.visibility = View.INVISIBLE
-                2 -> radioButton3.visibility = View.GONE
-                2 or 3 -> radioButton4.visibility = View.GONE
+                2 -> {
+                    radioButton3.visibility = View.GONE
+                    radioButton4.visibility = View.GONE
+                }
+                3 -> radioButton4.visibility = View.GONE
             }
         }
     }
 
-    private fun resetRadioGroup() {
-        binding.apply {
-            radioButtons.visibility = View.VISIBLE
-            radioButton1.visibility = View.VISIBLE
-            radioButton2.visibility = View.VISIBLE
-            radioButton3.visibility = View.VISIBLE
-            radioButton4.visibility = View.VISIBLE
+    private fun enableViews(groups: List<ViewGroup>) {
+        groups.forEach { group ->
+            group.visibility = View.VISIBLE
+            group.forEach {
+                it.visibility = View.VISIBLE
+            }
         }
     }
 
-//    private fun loadChips(model: CardModel) {
-//        binding.attrChips.forEach {
-//            (it as Chip).apply {
-//                if (this.text.toString().toLowerCase().equals())
-//            }
-//        }
-//    }
+    private fun loadChips(model: CardModel) {
+        binding.attrChips.forEach {
+            (it as Chip).apply {
+                if (!model.top.food.features.containsIgnoreCase(this.text.toString())) {
+                    this.visibility = View.GONE
+                }
+            }
+        }
+    }
 
     private fun bindImgs(model: CardModel) {
         val bottomDrawable = binding.bottom.drawable
@@ -125,6 +118,9 @@ class SwipeActivity : AppCompatActivity() {
         }
     }
 
+    private fun bindText(model: CardModel) {
+        binding.foodName.text = model.top.food.name
+    }
 
 
     private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
@@ -134,8 +130,10 @@ class SwipeActivity : AppCompatActivity() {
 
     private fun bind(model: CardModel) {
         bindImgs(model)
-        resetRadioGroup()
+        bindText(model)
+        enableViews(listOf(binding.radioButtons, binding.attrChips))
         enableBttns(model.top.food.imgUrls.size)
+        loadChips(model)
     }
 
 }

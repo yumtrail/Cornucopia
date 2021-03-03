@@ -238,6 +238,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             android:autoSizeTextType="uniform"
+            android:textSize="36sp"
             app:layout_constraintBottom_toTopOf="@+id/foodDesc"
             app:layout_constraintEnd_toStartOf="@id/verifiedIcon"
             app:layout_constraintHorizontal_chainStyle="packed"

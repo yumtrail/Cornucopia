@@ -5,7 +5,9 @@
     <string name="spicy_chip">Spicy</string>
     <string name="vegetarian_chip">Vegetarian</string>
     <string name="customizable_chip">Customizable</string>
-    <string name="sandwich_chip">Sandwich</string>
-    <string name="salad_chip">Salad</string>
-    <string name="soup_chip">Soup</string>
+    <string name="dessert_chip">Dessert</string>
+    <string name="seafood_chip">Seafood</string>
+    <string name="chinese_chip">Chinese</string>
+    <string name="mexican_chip">Mexican</string>
+    <string name="italian_chip">Italian</string>
 </resources>
