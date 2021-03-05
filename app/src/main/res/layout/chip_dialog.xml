@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:clickable="false"
+        android:textSize="18sp"
+        app:chipBackgroundColor="@android:color/white"
+        app:chipIconSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/moreBttn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/moreBttn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Show more"
+        android:textColor="#8BC34A"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_up_arrow_outline"
+        app:iconPadding="10dp"
+        app:iconTint="#8BC34A"
+        app:layout_constraintBottom_toTopOf="@id/lessBttn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipIcon"
+        app:rippleColor="#8BC34A"
+        app:strokeColor="#8BC34A"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/lessBttn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="Show less"
+        android:textColor="#FF9800"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_outline_down"
+        app:iconPadding="10dp"
+        app:iconTint="#FF9800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreBttn"
+        app:rippleColor="#FF9800"
+        app:strokeColor="#FF9800"
+        app:strokeWidth="2dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

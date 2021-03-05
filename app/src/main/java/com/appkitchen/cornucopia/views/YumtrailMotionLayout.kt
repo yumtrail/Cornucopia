@@ -18,6 +18,7 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
     private var touchStarted = false
     private var clickStartTime: Long = 0
     private var numBtns = 0
+    private var maxNumBtns = 4
 
     private val imageView by lazy {
         findViewById<MultiImageView>(R.id.top)
@@ -64,9 +65,9 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
         })
     }
 
-    private fun checkNextRBtn() {
+    private fun nextImg() {
         if (imageView.imgUrls.size > 1) {
-            numBtns = if (imageView.imgUrls.size > 4) 4 else imageView.imgUrls.size
+            numBtns = if (imageView.imgUrls.size > maxNumBtns) maxNumBtns else imageView.imgUrls.size
             val checkedBttn: RadioButton = radioGroup.findViewById(radioGroup.checkedRadioButtonId)
             val nextIdx = (radioGroup.indexOfChild(checkedBttn) + 1) % numBtns
             imageView.loadImgAtIdx(nextIdx)
@@ -86,7 +87,7 @@ class YumtrailMotionLayout(context: Context, attributeSet: AttributeSet? = null)
             }
             MotionEvent.ACTION_UP -> {
                 if (event.eventTime - clickStartTime <= clickTimeOut) {
-                    checkNextRBtn()
+                    nextImg()
                 }
                 touchStarted = false
                 return super.onTouchEvent(event)

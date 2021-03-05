@@ -33,7 +33,7 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="42dp"
+            android:layout_height="39dp"
             android:fontFamily="@font/hkgrotesk_bold"
             android:text="@string/yumtrail_name"
             android:textColor="@color/yum_green"
@@ -231,52 +231,60 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <TextView
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/foodName"
             android:layout_width="200dp"
-            android:layout_height="42dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            android:autoSizeTextType="uniform"
+            android:textAlignment="viewEnd"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/foodDesc"
             app:layout_constraintEnd_toStartOf="@id/verifiedIcon"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chipsPanel" />
 
         <ImageView
             android:id="@+id/verifiedIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
             android:src="@drawable/verified_badge"
-            app:layout_constraintBottom_toTopOf="@id/foodDesc"
+            android:tooltipText="Pictures Verified by Customers"
+            app:layout_constraintBottom_toTopOf="@+id/foodDesc"
             app:layout_constraintEnd_toStartOf="@id/distanceAway"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/foodName"
-            app:layout_constraintTop_toBottomOf="@id/chipsPanel" />
+            app:layout_constraintTop_toBottomOf="@+id/chipsPanel" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/distanceAway"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_marginStart="21dp"
             android:layout_marginTop="12dp"
-            android:text="0.7 mi."
-            android:textSize="21sp"
-            app:layout_constraintBottom_toTopOf="@id/foodDesc"
+            app:autoSizeMaxTextSize="32sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@+id/foodDesc"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/verifiedIcon"
-            app:layout_constraintTop_toBottomOf="@id/chipsPanel" />
+            app:layout_constraintTop_toBottomOf="@+id/chipsPanel" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/foodDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:text="Spicy Jackfruit Carnitas, Flour Tortilla, Lime-Infused Guac"
-            android:textSize="15sp"
+            android:layout_width="350dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/foodName" />
     </androidx.constraintlayout.widget.ConstraintLayout>

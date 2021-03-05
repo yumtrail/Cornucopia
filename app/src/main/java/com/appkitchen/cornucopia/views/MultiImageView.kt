@@ -3,6 +3,7 @@ package com.appkitchen.cornucopia.com.appkitchen.cornucopia.views
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.util.ArrayMap
 import android.util.AttributeSet
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -15,7 +16,7 @@ class MultiImageView : androidx.appcompat.widget.AppCompatImageView {
     private val cornerRadius = 25
     var prevDrawable: Drawable? = null
     var tempDrawable: Drawable? = null
-    private var drawableCache: HashMap<Int, Bitmap> = HashMap()
+    private var drawableCache: ArrayMap<Int, Bitmap> = ArrayMap()
     private val circularProgressDrawable = CircularProgressDrawable(this.context)
 
     init {

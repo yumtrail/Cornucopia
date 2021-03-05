@@ -1,5 +1,6 @@
 package com.appkitchen.cornucopia.activities
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,13 @@ import com.appkitchen.cornucopia.databinding.ActivitySwipeBinding
 import com.appkitchen.cornucopia.models.CardModel
 import com.appkitchen.cornucopia.models.FoodCardViewModel
 import com.appkitchen.cornucopia.models.FoodCardViewModelFactory
+import com.appkitchen.cornucopia.showChipsDialog
 import com.google.android.material.chip.Chip
+import kotlin.random.Random
 
 class SwipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySwipeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_swipe)
@@ -38,6 +42,7 @@ class SwipeActivity : AppCompatActivity() {
     private fun setupViews(binding: ActivitySwipeBinding, model: FoodCardViewModel) {
         setupLayout(binding.foodLayout, model)
         setupImgButtons(binding)
+        setupChips(binding)
     }
 
     private fun setupLayout(layout: MotionLayout, model: FoodCardViewModel) {
@@ -69,6 +74,30 @@ class SwipeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setupChips(binding: ActivitySwipeBinding) {
+        binding.attrChips.forEach { chip ->
+            chip.setOnLongClickListener {
+                (chip as Chip).chipIcon?.let { icon ->
+                    showDialog(chip.text, icon)
+                }
+                true
+            }
+        }
+    }
+
+    private fun showDialog(text: CharSequence, image: Drawable) {
+        val dialog = showChipsDialog {
+            setupChip(text, image)
+            moreBttnClickListener {
+
+            }
+            lessBttnClickListener {
+
+            }
+        }
+        dialog.show()
     }
 
     private fun enableBttns(numImgs: Int) {
@@ -120,8 +149,14 @@ class SwipeActivity : AppCompatActivity() {
 
     private fun bindText(model: CardModel) {
         binding.foodName.text = model.top.food.name
+        binding.foodDesc.text = model.top.food.description
+        binding.distanceAway.text = getDistance()
+
     }
 
+    private fun getDistance(): String {
+        return "${"%.${2}f".format(Random.nextDouble(0.1, 2.0)).toDouble()} mi."
+    }
 
     private fun resetView(layout: MotionLayout, firstButton: RadioButton) {
         layout.progress = 0f
